@@ -3,11 +3,12 @@
 		<title>Coding Dojo - Ninja Game</title>
 	</head>
 <body>
-	<div id='background'>
-        <div id='character' style='position:absolute; top:100px; left:450px; background-image: url("img/down1.png"); width:59px; height:86px;'></div>
-    </div>
+	<div id="background" style="width: 900px; height: 750px; background-image: url('img/white_bg.jpg');">
+		<div id="character" style="width: 59px; height: 86px; background-image: url('img/down1.png'); position: absolute; left: 150px; top: 150px;"></div>  
+	</div>
     <script type="text/javascript">
-	    var leftValue = 450, topValue = 100;
+	    var leftValue = 150, topValue = 150;
+		var walkValue = 1;
 
 		var character = document.getElementById("character");
 
@@ -29,17 +30,18 @@
     	document.onkeydown = function(e) {
     		console.log(e);
 
+			if(walkValue == 1) {
+				walkValue = 2;
+			} else if(walkValue == 2) {
+				walkValue = 1;
+			}
+
 			if(e.keyCode == 37) { // LEFT
 				var move = leftValue - 10;
 				
 				if(isMoveValid(move)) {
 					leftValue = move;
-
-					if(character.style.backgroundImage == 'url("img/left1.png")') {
-						character.style.backgroundImage = "url('img/left2.png')"
-					} else {
-						character.style.backgroundImage = "url('img/left1.png')";
-					}
+					character.style.backgroundImage = `url("img/left${walkValue}.png")`;
 				}
 			}
 			else if(e.keyCode == 38) { // TOP;
@@ -47,12 +49,7 @@
 
 				if(isMoveValid(move)) {
 					topValue = move;
-
-					if(character.style.backgroundImage == 'url("img/top1.png")') {
-						character.style.backgroundImage = "url('img/top2.png')";
-					} else {
-						character.style.backgroundImage = "url('img/top1.png')";
-					}
+					character.style.backgroundImage = `url("img/top${walkValue}.png")`;
 				}
 			}
 			else if (e.keyCode == 39) { // RIGHT
@@ -60,12 +57,7 @@
 
 				if(isMoveValid(move)) {
 					leftValue = move;
-
-					if(character.style.backgroundImage == 'url("img/right1.png")') {
-						character.style.backgroundImage = "url('img/right2.png')"
-					} else {
-						character.style.backgroundImage = "url('img/right1.png')";
-					}
+					character.style.backgroundImage = `url("img/right${walkValue}.png")`;
 				} 		
 			}
 			else if (e.keyCode == 40) { // DOWN
@@ -73,12 +65,7 @@
 
 				if(isMoveValid(move)) {
 					topValue = move;
-					
-					if(character.style.backgroundImage == 'url("img/down1.png")') {
-						character.style.backgroundImage = "url('img/down2.png')";
-					} else {
-						character.style.backgroundImage = "url('img/down1.png')";
-					}
+					character.style.backgroundImage = `url("img/down${walkValue}.png")`;
 				}
 			}
 
